@@ -36,5 +36,10 @@ export interface MatchesResponse {
   matches: Match[];
 }
 
+export interface WSMatches {
+  type: string;
+  data: Match[];
+}
+
 //type for get matches
 export type GetMatchesResponseType = SuccessfulResponse<MatchesResponse>;
