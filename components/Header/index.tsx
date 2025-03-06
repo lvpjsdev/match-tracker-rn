@@ -31,7 +31,7 @@ export const Header: React.FC<Props> = ({ isError, isDisabled, onRetry }) => {
           onClick={onRetry}
           iconAfter={<RetryIcon width={24} height={24} />} // Передал параметры, для отображения
         >
-          <Text>Обновить</Text>
+          Обновить
         </Button>
       </View>
     </View>

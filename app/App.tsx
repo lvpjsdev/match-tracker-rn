@@ -1,11 +1,8 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { fetchMatches } from '../api/api';
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { Header } from '@/components/Header';
+import { MatchCard } from '@/components/MatchCard';
 
 export default function App() {
   const { data, isFetching, isError, refetch } = useQuery({
@@ -16,13 +13,21 @@ export default function App() {
   return (
     <View
       style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        backgroundColor: '#000',
+        height: '100%',
       }}
     >
       <Header onRetry={refetch} isError={isError} isDisabled={isFetching} />
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      {data?.data.matches.map((match, index) => (
+        <MatchCard
+          key={index}
+          homeTeamName={match.homeTeam.name}
+          awayTeamName={match.awayTeam.name}
+          homeScore={match.homeScore}
+          awayScore={match.awayScore}
+          status={match.status}
+        />
+      ))}
     </View>
   );
 }

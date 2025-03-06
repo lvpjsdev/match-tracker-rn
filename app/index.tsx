@@ -1,11 +1,4 @@
-import { Text, View } from 'react-native';
-import { fetchMatches } from '../api/api';
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from '@tanstack/react-query';
-import { Header } from '@/components/Header';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './App';
 
 export default function Index() {
