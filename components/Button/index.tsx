@@ -8,14 +8,13 @@ import {
 } from 'react-native';
 
 interface Props {
-  children: ReactNode;
   onClick: () => void;
   disabled?: boolean;
   iconAfter?: ReactNode;
   isLoading?: boolean; // Добавил пропс для индикатора загрузки
 }
 
-export const Button: React.FC<Props> = ({
+export const Button: React.FC<React.PropsWithChildren<Props>> = ({
   children,
   onClick,
   disabled = false,

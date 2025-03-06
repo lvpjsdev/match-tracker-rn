@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import AlertIcon from '../../assets/alert-triangle.svg';
+import AlertIcon from '../../assets/icons/alert-triangle.svg';
 
 export const ErrorComponent = () => {
   return (

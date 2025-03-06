@@ -7,10 +7,10 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import { ErrorComponent } from '../ErrorComponent'; // Нужно будет переписать этот компонент
+import { ErrorComponent } from '../ErrorComponents'; // Нужно будет переписать этот компонент
 import { Button } from '../Button'; // Нужно будет переписать этот компонент
-import RetryIcon from '../../assets/Refresh.svg'; // Установка: npx expo install react-native-svg
-import logo from '../../assets/Logo.png';
+import RetryIcon from '../../assets/icons/Refresh.svg'; // Установка: npx expo install react-native-svg
+import logo from '../../assets/images/Logo.png';
 
 interface Props {
   isError?: boolean;
@@ -31,7 +31,7 @@ export const Header: React.FC<Props> = ({ isError, isDisabled, onRetry }) => {
           onClick={onRetry}
           iconAfter={<RetryIcon width={24} height={24} />} // Передал параметры, для отображения
         >
-          Обновить
+          <Text>Обновить</Text>
         </Button>
       </View>
     </View>

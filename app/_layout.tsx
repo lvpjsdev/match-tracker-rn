@@ -1,39 +1,44 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+import { useFonts, Inter_600SemiBold } from '@expo-google-fonts/inter';
+import { View, StyleSheet, Text } from 'react-native';
+import { useCallback } from 'react';
+import { Loader } from '@/components/Loader';
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+  let [fontsLoaded, fontError] = useFonts({
+    Inter_600SemiBold,
   });
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      //
     }
-  }, [loaded]);
+  }, [fontsLoaded, fontError]);
 
-  if (!loaded) {
-    return null;
+  if (!fontsLoaded && !fontError) {
+    return <Loader />;
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <View onLayout={onLayoutRootView} style={styles.container}>
+      <Stack screenOptions={{ headerShown: false }} />
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'rgba(6, 8, 12, 1)',
+    padding: 42,
+    minWidth: 320,
+  },
+  text: {
+    color: 'rgba(255, 255, 255, 1)',
+    fontFamily: 'Inter_600SemiBold',
+    fontWeight: '600',
+    lineHeight: 1.5 * 16, // 1.5 * font-size
+  },
+});
+
+export const GlobalStyles = styles;
