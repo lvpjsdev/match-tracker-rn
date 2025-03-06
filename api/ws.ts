@@ -1,7 +1,6 @@
 import { WEB_SOCKET_URL } from '@/constants';
-import { type QueryClient } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
-import { Match, MatchesResponse, SuccessfulResponse, WSMatches } from './types';
+import { WSMatches } from './types';
 
 interface WebSocketService {
   (
