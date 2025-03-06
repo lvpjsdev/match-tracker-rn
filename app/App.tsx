@@ -21,8 +21,8 @@ export default function App() {
       {data?.data.matches.map((match, index) => (
         <MatchCard
           key={index}
-          homeTeamName={match.homeTeam.name}
-          awayTeamName={match.awayTeam.name}
+          homeTeam={match.homeTeam}
+          awayTeam={match.awayTeam}
           homeScore={match.homeScore}
           awayScore={match.awayScore}
           status={match.status}
