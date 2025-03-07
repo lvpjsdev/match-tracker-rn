@@ -1,13 +1,16 @@
 const { getDefaultConfig } = require('expo/metro-config');
+const {
+  wrapWithReanimatedMetroConfig,
+} = require('react-native-reanimated/metro-config');
 
-module.exports = (() => {
+const baseConfig = (() => {
   const config = getDefaultConfig(__dirname);
 
   const { transformer, resolver } = config;
 
   config.transformer = {
     ...transformer,
-    babelTransformerPath: require.resolve('react-native-svg-transformer/expo'),
+    babelTransformerPath: require.resolve('react-native-svg-transformer'),
   };
   config.resolver = {
     ...resolver,
@@ -17,3 +20,8 @@ module.exports = (() => {
 
   return config;
 })();
+if (process.env.EXPO_ROUTER_APP_ROOT) {
+  module.exports = baseConfig;
+} else {
+  module.exports = wrapWithReanimatedMetroConfig(baseConfig);
+}
