@@ -1,5 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  withTiming,
+  Easing,
+} from 'react-native-reanimated';
 import { MatchStatus, Team } from '../../api/types';
 import { CardStatus } from '../CardStatus';
 import { TeamInfo } from './TeamInfo';
@@ -8,6 +15,37 @@ import TeamIcon from '../../assets/icons/comand-icon.svg'; // Убедитесь
 import ArrowDownIcon from '../../assets/icons/arrow-drop.svg';
 import ArrowUpIcon from '../../assets/icons/chevron-up.svg';
 import { ComponentStyles } from './styles';
+
+const AnimatedScore: React.FC<{
+  homeScore: number;
+  awayScore: number;
+}> = ({ homeScore, awayScore }) => {
+  const scale = useSharedValue(1);
+
+  useEffect(() => {
+    scale.value = withSpring(1.2, {
+      damping: 10,
+      stiffness: 100,
+    });
+
+    setTimeout(() => {
+      scale.value = withTiming(1, {
+        duration: 500,
+        easing: Easing.out(Easing.exp),
+      });
+    }, 250);
+  }, [homeScore, awayScore]);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
+
+  return (
+    <Animated.Text style={[GlobalStyles.text, styles.score, animatedStyle]}>
+      {`${homeScore} : ${awayScore}`}
+    </Animated.Text>
+  );
+};
 
 interface Props {
   homeTeam: Team;
@@ -37,9 +75,7 @@ export const MatchCard: React.FC<Props> = ({
             </Text>
           </View>
           <View style={styles.statusWrapper}>
-            <Text
-              style={[GlobalStyles.text, styles.score]}
-            >{`${homeScore} : ${awayScore}`}</Text>
+            <AnimatedScore homeScore={homeScore} awayScore={awayScore} />
             <CardStatus status={status} />
           </View>
           <View style={[styles.commandWrapper, styles.commandWrapperRevers]}>
