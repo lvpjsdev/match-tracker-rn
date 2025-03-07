@@ -4,13 +4,28 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Header } from '@/components/Header';
 import { MatchCard } from '@/components/MatchCard';
 import { useWebSocket } from '@/api/ws';
+import { useState } from 'react';
 
 export default function App() {
+  const [status, setStatus] = useState('All');
   const queryClient = useQueryClient();
 
   const { data, isFetching, isError, refetch } = useQuery({
     queryKey: ['matches'],
     queryFn: fetchMatches,
+    select: (data) => {
+      if (status === 'All') {
+        return data;
+      }
+
+      return {
+        ...data,
+        data: {
+          ...data.data,
+          matches: data.data.matches.filter((match) => match.status === status),
+        },
+      };
+    },
   });
 
   useWebSocket((wsData) => {
@@ -38,7 +53,13 @@ export default function App() {
         height: '100%',
       }}
     >
-      <Header onRetry={refetch} isError={isError} isDisabled={isFetching} />
+      <Header
+        onRetry={refetch}
+        isError={isError}
+        isDisabled={isFetching}
+        currentStatus={status}
+        setCurrentStatus={setStatus}
+      />
       {data?.data?.matches?.map((match, index) => (
         <MatchCard
           key={index}

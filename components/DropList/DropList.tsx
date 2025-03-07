@@ -10,6 +10,7 @@ import {
 import { DropItem } from '../DropList/DropItem';
 import ArrowUpIcon from '../../assets/icons/arrowup2.svg';
 import ArrowDownIcon from '../../assets/icons/arrowdown2.svg';
+import { ComponentStyles } from './styles';
 
 interface Props {
   items: {
@@ -35,8 +36,8 @@ export const DropList: React.FC<Props> = ({ items, onSelect, valueId }) => {
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => setIsOpen(!isOpen)} style={styles.button}>
-        <Text style={styles.button}>{valueLabel}</Text>
+      <Pressable onPress={() => setIsOpen(!isOpen)} style={[styles.button]}>
+        <Text style={styles.buttonText}>{valueLabel}</Text>
         {isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
       </Pressable>
       {isOpen && (
@@ -57,13 +58,19 @@ export const DropList: React.FC<Props> = ({ items, onSelect, valueId }) => {
 };
 
 const styles = StyleSheet.create({
+  buttonText: {
+    color: 'rgba(255, 255, 255, 1)',
+    fontWeight: '500',
+    fontSize: 16,
+    lineHeight: 24,
+  },
   button: {
     display: 'flex',
     padding: 16,
     borderRadius: 4,
     flexDirection: 'row',
-    justifyContent: 'center',
     backgroundColor: 'rgba(11, 14, 18, 1)',
+    justifyContent: 'space-between',
   },
   container: {
     position: 'relative',
