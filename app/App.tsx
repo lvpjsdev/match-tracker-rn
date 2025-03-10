@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { fetchMatches } from '../api/api';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Header } from '@/components/Header';
@@ -60,16 +60,18 @@ export default function App() {
         currentStatus={status}
         setCurrentStatus={setStatus}
       />
-      {data?.data?.matches?.map((match, index) => (
-        <MatchCard
-          key={index}
-          homeTeam={match.homeTeam}
-          awayTeam={match.awayTeam}
-          homeScore={match.homeScore}
-          awayScore={match.awayScore}
-          status={match.status}
-        />
-      ))}
+      <ScrollView>
+        {data?.data?.matches?.map((match, index) => (
+          <MatchCard
+            key={index}
+            homeTeam={match.homeTeam}
+            awayTeam={match.awayTeam}
+            homeScore={match.homeScore}
+            awayScore={match.awayScore}
+            status={match.status}
+          />
+        ))}
+      </ScrollView>
     </View>
   );
 }

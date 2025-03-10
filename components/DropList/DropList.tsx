@@ -11,6 +11,8 @@ import { DropItem } from '../DropList/DropItem';
 import ArrowUpIcon from '../../assets/icons/arrowup2.svg';
 import ArrowDownIcon from '../../assets/icons/arrowdown2.svg';
 import { ComponentStyles } from './styles';
+import { useMediaQuery } from 'react-responsive';
+import { SMALL_SCREEN_MEDIA_QUERY } from '@/constants';
 
 interface Props {
   items: {
@@ -23,6 +25,7 @@ interface Props {
 }
 
 export const DropList: React.FC<Props> = ({ items, onSelect, valueId }) => {
+  const isSmallScreen = useMediaQuery({ query: SMALL_SCREEN_MEDIA_QUERY });
   const [isOpen, setIsOpen] = useState(false);
   const valueLabel = useMemo(
     () => items.find((item) => item.id === valueId)?.label,
@@ -35,7 +38,9 @@ export const DropList: React.FC<Props> = ({ items, onSelect, valueId }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, isSmallScreen && smallScreenStyles.container]}
+    >
       <Pressable onPress={() => setIsOpen(!isOpen)} style={[styles.button]}>
         <Text style={styles.buttonText}>{valueLabel}</Text>
         {isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
@@ -80,10 +85,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '100%',
     left: 0,
-    zIndex: 1,
     backgroundColor: 'rgba(15, 19, 24, 1)',
     borderRadius: 4,
     minWidth: '100%',
     maxHeight: 200,
+  },
+});
+
+const smallScreenStyles = StyleSheet.create({
+  container: {
+    width: '100%',
   },
 });

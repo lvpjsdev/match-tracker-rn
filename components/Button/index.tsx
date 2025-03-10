@@ -1,3 +1,5 @@
+import { GlobalStyles } from '@/app/_layout';
+import { SMALL_SCREEN_MEDIA_QUERY } from '@/constants';
 import React, { ReactNode, useState } from 'react';
 import {
   Text,
@@ -5,7 +7,9 @@ import {
   TouchableOpacity,
   View,
   ActivityIndicator,
+  Pressable,
 } from 'react-native';
+import { useMediaQuery } from 'react-responsive';
 
 interface Props {
   onClick: () => void;
@@ -21,6 +25,7 @@ export const Button: React.FC<React.PropsWithChildren<Props>> = ({
   iconAfter,
   isLoading = false, // Добавил isLoading и по умолчанию false
 }) => {
+  const isSmallScreen = useMediaQuery({ query: SMALL_SCREEN_MEDIA_QUERY });
   const [isPressed, setIsPressed] = useState(false);
 
   const handlePressIn = () => {
@@ -38,11 +43,12 @@ export const Button: React.FC<React.PropsWithChildren<Props>> = ({
     }
   };
   return (
-    <TouchableOpacity
+    <Pressable
       style={[
         styles.button,
         disabled && styles.disabledButton,
         isPressed && !disabled && styles.activeButton,
+        isSmallScreen && smallScreenStyles.button,
       ]}
       onPress={onPressHandler} // Заменил onClick на onPress
       disabled={disabled || isLoading} // Привязываем isLoading к disabled
@@ -53,12 +59,18 @@ export const Button: React.FC<React.PropsWithChildren<Props>> = ({
         <ActivityIndicator color='white' style={{ marginRight: 10 }} />
       )}
       <View style={styles.content}>
-        <Text style={[styles.text, disabled && styles.disabledText]}>
+        <Text
+          style={[
+            GlobalStyles.text,
+            styles.text,
+            disabled && styles.disabledText,
+          ]}
+        >
           {children}
         </Text>
         {iconAfter}
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
@@ -95,5 +107,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
+  },
+});
+
+const smallScreenStyles = StyleSheet.create({
+  button: {
+    width: '100%',
   },
 });

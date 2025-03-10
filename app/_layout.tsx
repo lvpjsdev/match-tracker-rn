@@ -1,13 +1,20 @@
 import { Stack } from 'expo-router';
-import { useFonts, Inter_600SemiBold } from '@expo-google-fonts/inter';
+import {
+  useFonts,
+  Inter_600SemiBold,
+  Inter_500Medium,
+} from '@expo-google-fonts/inter';
 import { View, StyleSheet, Text } from 'react-native';
 import { useCallback } from 'react';
 import { Loader } from '@/components/Loader';
+import { useIsMobile } from './hooks';
 
 export default function RootLayout() {
   let [fontsLoaded, fontError] = useFonts({
     Inter_600SemiBold,
+    Inter_500Medium,
   });
+  const isMobile = useIsMobile();
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded || fontError) {
@@ -20,7 +27,10 @@ export default function RootLayout() {
   }
 
   return (
-    <View onLayout={onLayoutRootView} style={styles.container}>
+    <View
+      onLayout={onLayoutRootView}
+      style={[styles.container, isMobile && styles.containerMobile]}
+    >
       <Stack screenOptions={{ headerShown: false }} />
     </View>
   );
@@ -32,6 +42,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(6, 8, 12, 1)',
     padding: 42,
     minWidth: 320,
+  },
+  containerMobile: {
+    paddingVertical: 32,
+    paddingHorizontal: 16,
   },
   text: {
     color: 'rgba(255, 255, 255, 1)',

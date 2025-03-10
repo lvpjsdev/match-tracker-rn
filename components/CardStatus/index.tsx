@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { MatchStatus } from '../../api/types'; // Убедитесь, что путь корректен
+import { useIsMobile } from '@/app/hooks';
 
 interface Props {
   status: MatchStatus;
@@ -33,9 +34,16 @@ const getTextAndStyles = (status: MatchStatus) => {
 
 export const CardStatus: React.FC<Props> = ({ status }) => {
   const { backgroundColor, text } = getTextAndStyles(status);
+  const isMobile = useIsMobile();
 
   return (
-    <View style={[styles.container, { backgroundColor }]}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor },
+        isMobile && styles.mobileContainer,
+      ]}
+    >
       <Text style={styles.text}>{text}</Text>
     </View>
   );
@@ -46,9 +54,13 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 21,
     borderRadius: 4,
-    minWidth: 50,
+    minWidth: 75,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  mobileContainer: {
+    paddingVertical: 4,
+    paddingHorizontal: 10,
   },
   text: {
     color: 'rgba(255, 255, 255, 1)',
