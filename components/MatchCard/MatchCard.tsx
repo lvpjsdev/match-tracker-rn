@@ -70,9 +70,14 @@ export const MatchCard: React.FC<Props> = ({
   return (
     <Pressable
       onPress={() => setIsOpen((state) => !state)}
-      style={styles.wrapperCard}
+      style={[styles.wrapperCard, isMobile && styles.mobileWrapperCard]}
     >
-      <View style={styles.shortInfoWrapper}>
+      <View
+        style={[
+          styles.shortInfoWrapper,
+          isMobile && styles.mobileShortInfoWrapper,
+        ]}
+      >
         <View style={styles.commandWrapper}>
           <TeamIcon width={24} height={24} />
           <Text style={[GlobalStyles.text, ComponentStyles.text]}>
@@ -89,13 +94,21 @@ export const MatchCard: React.FC<Props> = ({
             {awayTeam.name}
           </Text>
         </View>
-        <View style={styles.iconWrapper}>
+        <View
+          style={[styles.iconWrapper, isMobile && styles.mobileIconWrapper]}
+        >
           {isOpen ? <ArrowDownIcon /> : <ArrowUpIcon />}
         </View>
       </View>
       {isOpen && (
-        <View style={styles.teamsInfoWrapper}>
+        <View
+          style={[
+            styles.teamsInfoWrapper,
+            isMobile && styles.mobileTeamsInfoWrapper,
+          ]}
+        >
           <TeamInfo team={homeTeam} />
+          {isMobile && <Divider />}
           <TeamInfo team={awayTeam} />
         </View>
       )}
@@ -123,6 +136,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     flexWrap: 'wrap',
     marginBottom: 8,
+    gap: 8,
   },
   shortInfoWrapper: {
     position: 'relative',
@@ -135,6 +149,11 @@ const styles = StyleSheet.create({
     width: '100%',
     // alignSelf: 'stretch',
     // flexBasis: '100%',
+  },
+  mobileShortInfoWrapper: {
+    paddingRight: 0,
+    flexWrap: 'wrap',
+    gap: 8,
   },
   scoresInfoWrapper: {
     width: '100%',
@@ -187,5 +206,11 @@ const styles = StyleSheet.create({
   iconWrapper: {
     position: 'absolute',
     right: 0,
+  },
+  mobileIconWrapper: {
+    position: 'static',
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
   },
 });

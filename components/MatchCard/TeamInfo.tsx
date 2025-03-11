@@ -13,7 +13,7 @@ interface TeamInfoProps {
 export const TeamInfo: React.FC<TeamInfoProps> = ({ team }) => {
   const isMobile = useIsMobile();
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isMobile && styles.mobileContainer]}>
       <View style={styles.playersListWrapper}>
         {team.players.map((player, index) => (
           <View style={styles.playerContainer} key={index}>
@@ -80,6 +80,9 @@ const styles = StyleSheet.create({
     gap: 8,
     flex: 1,
     maxWidth: '50%', // Ограничиваем ширину каждой команды
+  },
+  mobileContainer: {
+    maxWidth: '100%',
   },
   playersListWrapper: {
     display: 'flex',
