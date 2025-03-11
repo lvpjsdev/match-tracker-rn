@@ -49,7 +49,7 @@ export default function App() {
   return (
     <View
       style={{
-        backgroundColor: '#000',
+        backgroundColor: 'rgba(6, 8, 12, 1)',
         height: '100%',
       }}
     >

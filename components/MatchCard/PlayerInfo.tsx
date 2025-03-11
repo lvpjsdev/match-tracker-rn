@@ -38,15 +38,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(16, 19, 24, 1)',
     paddingVertical: 8,
-    paddingHorizontal: 24,
-    alignContent: 'stretch',
+    paddingHorizontal: 12,
     borderRadius: 4,
-    minWidth: 110,
-  },
-  mobileContainer: {
-    flexDirection: 'column',
-    paddingVertical: 7,
-    paddingHorizontal: 4,
+    width: '100%',
   },
   avatar: {
     height: 36,

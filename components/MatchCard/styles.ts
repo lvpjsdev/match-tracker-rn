@@ -21,5 +21,6 @@ export const ComponentStyles = StyleSheet.create({
   textSmallWarper: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
   },
 });

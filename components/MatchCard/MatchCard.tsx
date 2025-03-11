@@ -68,57 +68,37 @@ export const MatchCard: React.FC<Props> = ({
   const isMobile = useIsMobile();
 
   return (
-    <Pressable onPress={() => setIsOpen((state) => !state)}>
-      <View style={[styles.wrapperCard, isMobile && styles.mobileWrapperCard]}>
-        <View
-          style={[styles.shortInfoWrapper, isMobile && { flexWrap: 'wrap' }]}
-        >
-          <View style={[styles.scoresInfoWrapper, { width: '100%' }]}>
-            <View style={styles.commandWrapper}>
-              <TeamIcon width={24} height={24} />
-              <Text style={[GlobalStyles.text, ComponentStyles.text]}>
-                {homeTeam.name}
-              </Text>
-            </View>
-            <View style={[styles.statusWrapper]}>
-              <AnimatedScore homeScore={homeScore} awayScore={awayScore} />
-              <CardStatus status={status} />
-            </View>
-            <View
-              style={[
-                styles.commandWrapper,
-                styles.commandWrapperRevers,
-                isMobile && styles.mobileCommandWrapper,
-              ]}
-            >
-              <TeamIcon width={24} height={24} />
-              <Text style={[GlobalStyles.text, styles.teamName]}>
-                {awayTeam.name}
-              </Text>
-            </View>
-          </View>
-          <View
-            style={[
-              { width: 28, marginLeft: 10 },
-              isMobile && styles.mobileDropdownButton,
-            ]}
-          >
-            {isOpen ? <ArrowDownIcon /> : <ArrowUpIcon />}
-          </View>
+    <Pressable
+      onPress={() => setIsOpen((state) => !state)}
+      style={styles.wrapperCard}
+    >
+      <View style={styles.shortInfoWrapper}>
+        <View style={styles.commandWrapper}>
+          <TeamIcon width={24} height={24} />
+          <Text style={[GlobalStyles.text, ComponentStyles.text]}>
+            {homeTeam.name}
+          </Text>
         </View>
-        {isOpen && (
-          <View
-            style={[
-              styles.teamsInfoWrapper,
-              isMobile && styles.mobileTeamsInfoWrapper,
-            ]}
-          >
-            <TeamInfo team={homeTeam} />
-            {isMobile && <Divider />}
-            <TeamInfo team={awayTeam} />
-          </View>
-        )}
+        <View style={styles.statusWrapper}>
+          <AnimatedScore homeScore={homeScore} awayScore={awayScore} />
+          <CardStatus status={status} />
+        </View>
+        <View style={[styles.commandWrapper, styles.commandWrapperRevers]}>
+          <TeamIcon width={24} height={24} />
+          <Text style={[GlobalStyles.text, ComponentStyles.text]}>
+            {awayTeam.name}
+          </Text>
+        </View>
+        <View style={styles.iconWrapper}>
+          {isOpen ? <ArrowDownIcon /> : <ArrowUpIcon />}
+        </View>
       </View>
+      {isOpen && (
+        <View style={styles.teamsInfoWrapper}>
+          <TeamInfo team={homeTeam} />
+          <TeamInfo team={awayTeam} />
+        </View>
+      )}
     </Pressable>
   );
 };
@@ -145,13 +125,14 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   shortInfoWrapper: {
+    position: 'relative',
     display: 'flex',
     minHeight: 52,
-    width: '100%',
-    flexWrap: 'nowrap',
+    paddingRight: 56,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    width: '100%',
     // alignSelf: 'stretch',
     // flexBasis: '100%',
   },
@@ -167,8 +148,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    gap: 32,
-    alignItems: 'center',
+    gap: 16,
+    alignItems: 'flex-start',
+    width: '100%',
   },
   mobileTeamsInfoWrapper: {
     width: '100%',
@@ -202,14 +184,8 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginBottom: 2,
   },
-  mobileDropdownButton: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexShrink: 0,
-    flexGrow: 1,
-    width: '100%',
-    marginTop: 8,
-    marginLeft: 10,
+  iconWrapper: {
+    position: 'absolute',
+    right: 0,
   },
 });

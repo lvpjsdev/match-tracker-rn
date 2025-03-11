@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
   container: {
     position: 'relative',
     display: 'flex',
+    minWidth: 170,
   },
   dropdownContent: {
     position: 'absolute',

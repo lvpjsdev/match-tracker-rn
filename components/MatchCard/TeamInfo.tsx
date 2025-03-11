@@ -14,11 +14,13 @@ export const TeamInfo: React.FC<TeamInfoProps> = ({ team }) => {
   const isMobile = useIsMobile();
   return (
     <View style={styles.container}>
-      {team.players.map((player, index) => (
-        <View style={styles.playerContainer} key={index}>
-          <PlayerInfo name={player.username} kills={player.kills} />
-        </View>
-      ))}
+      <View style={styles.playersListWrapper}>
+        {team.players.map((player, index) => (
+          <View style={styles.playerContainer} key={index}>
+            <PlayerInfo name={player.username} kills={player.kills} />
+          </View>
+        ))}
+      </View>
       <View style={styles.infoContainer}>
         <View style={[ComponentStyles.textSmallWarper]}>
           <Text
@@ -30,13 +32,7 @@ export const TeamInfo: React.FC<TeamInfoProps> = ({ team }) => {
           >
             Points:
           </Text>
-          <Text
-            style={[
-              GlobalStyles.text,
-              ComponentStyles.text,
-              isMobile && ComponentStyles.mobileText,
-            ]}
-          >
+          <Text style={[GlobalStyles.text, ComponentStyles.text]}>
             {' ' + team.points}
           </Text>
         </View>
@@ -50,13 +46,7 @@ export const TeamInfo: React.FC<TeamInfoProps> = ({ team }) => {
           >
             Место:
           </Text>
-          <Text
-            style={[
-              GlobalStyles.text,
-              ComponentStyles.text,
-              isMobile && ComponentStyles.mobileText,
-            ]}
-          >
+          <Text style={[GlobalStyles.text, ComponentStyles.text]}>
             {' ' + team.place}
           </Text>
         </View>
@@ -70,13 +60,7 @@ export const TeamInfo: React.FC<TeamInfoProps> = ({ team }) => {
           >
             Всего убийств:
           </Text>
-          <Text
-            style={[
-              GlobalStyles.text,
-              ComponentStyles.text,
-              isMobile && ComponentStyles.mobileText,
-            ]}
-          >
+          <Text style={[GlobalStyles.text, ComponentStyles.text]}>
             {' ' + team.total_kills}
           </Text>
         </View>
@@ -91,29 +75,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    // padding: 10,
-    // borderWidth: 1,
+    padding: 10,
     borderRadius: 5,
-    // gap: 8,
-    // minWidth: 123,
+    gap: 8,
+    flex: 1,
+    maxWidth: '50%', // Ограничиваем ширину каждой команды
+  },
+  playersListWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%',
+    gap: 8,
   },
   playerContainer: {
-    // minWidth: 123,
-    flexShrink: 3,
-    flexGrow: 0,
-    flexBasis: 'auto',
+    flexShrink: 1,
+    width: '100%', // Каждый игрок занимает всю ширину контейнера
   },
   infoContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    flexGrow: 1,
+    justifyContent: 'space-around',
     width: '100%',
-    paddingHorizontal: 24,
-    backgroundColor: 'rgba(16, 19, 24, 1)',
+    paddingHorizontal: 0,
     paddingVertical: 14,
-    marginTop: 8,
-  },
-  mobileTextSmall: {
-    flexShrink: 3,
+    backgroundColor: 'rgba(16, 19, 24, 1)',
   },
 });
