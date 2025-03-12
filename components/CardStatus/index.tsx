@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Platform } from 'react-native';
 import { MatchStatus } from '../../api/types'; // Убедитесь, что путь корректен
 import { useIsMobile } from '@/app/hooks';
 
@@ -22,7 +22,8 @@ const getTextAndStyles = (status: MatchStatus) => {
     case MatchStatus.Scheduled:
       return {
         backgroundColor: 'rgba(235, 100, 2, 1)',
-        text: 'Match preparing',
+        //Сокращаем текст для мобилок
+        text: Platform.OS !== 'web' ? 'Preparing' : 'Match preparing',
       };
     default:
       return {
@@ -44,7 +45,9 @@ export const CardStatus: React.FC<Props> = ({ status }) => {
         isMobile && styles.mobileContainer,
       ]}
     >
-      <Text style={styles.text}>{text}</Text>
+      <Text lineBreakMode='tail' numberOfLines={1} style={styles.text}>
+        {text}
+      </Text>
     </View>
   );
 };
@@ -60,7 +63,8 @@ const styles = StyleSheet.create({
   },
   mobileContainer: {
     paddingVertical: 4,
-    paddingHorizontal: 10,
+    paddingHorizontal: 8,
+    minWidth: 70,
   },
   text: {
     color: 'rgba(255, 255, 255, 1)',

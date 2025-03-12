@@ -13,6 +13,7 @@ import ArrowDownIcon from '../../assets/icons/arrowdown2.svg';
 import { ComponentStyles } from './styles';
 import { useMediaQuery } from 'react-responsive';
 import { SMALL_SCREEN_MEDIA_QUERY } from '@/constants';
+import { useIsMobile } from '@/app/hooks';
 
 interface Props {
   items: {
@@ -25,7 +26,7 @@ interface Props {
 }
 
 export const DropList: React.FC<Props> = ({ items, onSelect, valueId }) => {
-  const isSmallScreen = useMediaQuery({ query: SMALL_SCREEN_MEDIA_QUERY });
+  const isSmallScreen = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
   const valueLabel = useMemo(
     () => items.find((item) => item.id === valueId)?.label,

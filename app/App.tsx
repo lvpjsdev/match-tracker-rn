@@ -30,10 +30,6 @@ export default function App() {
 
   useWebSocket((wsData) => {
     queryClient.setQueryData<typeof data>(['matches'], (oldData) => {
-      console.log('oldData', oldData);
-
-      console.log('wsData', wsData);
-
       if (oldData) {
         return {
           ...oldData,

@@ -37,7 +37,11 @@ export const Header: React.FC<Props> = ({
   return (
     <View style={[styles.header, isMobile && mobileStyles.header]}>
       <View style={[styles.leftContainer, isMobile && mobileStyles.container]}>
-        <Image source={logo} style={styles.logo} resizeMode='contain' />
+        <Image
+          source={logo}
+          style={[styles.logo, isMobile && mobileStyles.logo]}
+          resizeMode='contain'
+        />
         <DropList
           items={items}
           valueId={currentStatus}
@@ -92,14 +96,16 @@ const styles = StyleSheet.create({
 
 const mobileStyles = StyleSheet.create({
   header: {
-    // position: 'relative',
     width: '100%',
     flexDirection: 'column',
     flexWrap: 'wrap',
     gap: 10,
     alignItems: 'center',
   },
-
+  logo: {
+    marginTop: 32,
+    marginBottom: 14,
+  },
   container: {
     flexDirection: 'column',
     width: '100%',

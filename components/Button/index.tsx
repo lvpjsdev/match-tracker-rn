@@ -1,4 +1,5 @@
 import { GlobalStyles } from '@/app/_layout';
+import { useIsMobile } from '@/app/hooks';
 import { SMALL_SCREEN_MEDIA_QUERY } from '@/constants';
 import React, { ReactNode, useState } from 'react';
 import {
@@ -25,7 +26,7 @@ export const Button: React.FC<React.PropsWithChildren<Props>> = ({
   iconAfter,
   isLoading = false, // Добавил isLoading и по умолчанию false
 }) => {
-  const isSmallScreen = useMediaQuery({ query: SMALL_SCREEN_MEDIA_QUERY });
+  const isSmallScreen = useIsMobile();
   const [isPressed, setIsPressed] = useState(false);
 
   const handlePressIn = () => {

@@ -6,4 +6,4 @@ export const DATA_KEYS = {
   MATCHES: 'matches',
 } as const;
 
-export const SMALL_SCREEN_MEDIA_QUERY = '(max-width: 640px)';
+export const SMALL_SCREEN_MEDIA_QUERY = '(max-width: 700px)';
