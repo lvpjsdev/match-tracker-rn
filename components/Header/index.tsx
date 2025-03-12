@@ -1,14 +1,12 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { useIsMobile } from '@/app/hooks';
-import { ErrorComponent } from '../ErrorComponents'; // Нужно будет переписать этот компонент
-import { Button } from '../Button'; // Нужно будет переписать этот компонент
-import RetryIcon from '../../assets/icons/Refresh.svg'; // Установка: npx expo install react-native-svg
+import { ErrorComponent } from '../ErrorComponents';
+import { Button } from '../Button';
+import RetryIcon from '../../assets/icons/Refresh.svg';
 import logo from '../../assets/images/Logo.png';
 import { DropList } from '../DropList';
 import { MatchStatus } from '@/api/types';
-import { useMediaQuery } from 'react-responsive';
-import { SMALL_SCREEN_MEDIA_QUERY } from '@/constants';
 
 interface Props {
   isError?: boolean;

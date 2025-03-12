@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     gap: 8,
     flex: 1,
-    maxWidth: '50%', // Ограничиваем ширину каждой команды
+    maxWidth: '50%',
   },
   mobileContainer: {
     maxWidth: '100%',
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   playerContainer: {
     flexShrink: 1,
-    width: '100%', // Каждый игрок занимает всю ширину контейнера
+    width: '100%',
   },
   infoContainer: {
     flexDirection: 'row',

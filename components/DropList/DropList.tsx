@@ -1,18 +1,8 @@
 import React, { useState, ReactNode, useMemo } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-  Pressable,
-} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { DropItem } from '../DropList/DropItem';
 import ArrowUpIcon from '../../assets/icons/arrowup2.svg';
 import ArrowDownIcon from '../../assets/icons/arrowdown2.svg';
-import { ComponentStyles } from './styles';
-import { useMediaQuery } from 'react-responsive';
-import { SMALL_SCREEN_MEDIA_QUERY } from '@/constants';
 import { useIsMobile } from '@/app/hooks';
 
 interface Props {

@@ -1,16 +1,13 @@
 import { GlobalStyles } from '@/app/_layout';
 import { useIsMobile } from '@/app/hooks';
-import { SMALL_SCREEN_MEDIA_QUERY } from '@/constants';
 import React, { ReactNode, useState } from 'react';
 import {
   Text,
   StyleSheet,
-  TouchableOpacity,
   View,
   ActivityIndicator,
   Pressable,
 } from 'react-native';
-import { useMediaQuery } from 'react-responsive';
 
 interface Props {
   onClick: () => void;
@@ -24,7 +21,7 @@ export const Button: React.FC<React.PropsWithChildren<Props>> = ({
   onClick,
   disabled = false,
   iconAfter,
-  isLoading = false, // Добавил isLoading и по умолчанию false
+  isLoading = false,
 }) => {
   const isSmallScreen = useIsMobile();
   const [isPressed, setIsPressed] = useState(false);
@@ -39,7 +36,6 @@ export const Button: React.FC<React.PropsWithChildren<Props>> = ({
 
   const onPressHandler = () => {
     if (!isLoading) {
-      // Проверяем, что не в состоянии загрузки
       onClick();
     }
   };
@@ -51,8 +47,8 @@ export const Button: React.FC<React.PropsWithChildren<Props>> = ({
         isPressed && !disabled && styles.activeButton,
         isSmallScreen && smallScreenStyles.button,
       ]}
-      onPress={onPressHandler} // Заменил onClick на onPress
-      disabled={disabled || isLoading} // Привязываем isLoading к disabled
+      onPress={onPressHandler}
+      disabled={disabled || isLoading}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
     >

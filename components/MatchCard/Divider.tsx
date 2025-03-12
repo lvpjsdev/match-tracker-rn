@@ -1,10 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Team } from '../../api/types';
-import { GlobalStyles } from '@/app/_layout';
-import { PlayerInfo } from './PlayerInfo';
-import { ComponentStyles } from './styles';
-import { useIsMobile } from '@/app/hooks';
 
 export const Divider: React.FC = () => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Platform } from 'react-native';
-import { MatchStatus } from '../../api/types'; // Убедитесь, что путь корректен
+import { MatchStatus } from '../../api/types';
 import { useIsMobile } from '@/app/hooks';
 
 interface Props {

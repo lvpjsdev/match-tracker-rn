@@ -147,8 +147,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    // alignSelf: 'stretch',
-    // flexBasis: '100%',
   },
   mobileShortInfoWrapper: {
     paddingRight: 0,
